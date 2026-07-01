@@ -1,9 +1,527 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Test</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MHD Omar Oudeh — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0f121a;
+    --bg-alt:#151a24;
+    --card:#171d29;
+    --ink:#edf0f3;
+    --ink-dim:#8a93a6;
+    --ink-faint:#5a6274;
+    --amber:#e8a33d;
+    --teal:#4fb0a8;
+    --line:#262c3a;
+    --line-soft:#1e2432;
+    --radius:2px;
+    --display: 'Space Grotesk', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+    --body: 'Inter', sans-serif;
+    --arabic: 'IBM Plex Sans Arabic', sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--body);
+    line-height:1.6;
+    font-size:16px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:960px; margin:0 auto; padding:0 28px;}
+  a{color:inherit;}
+
+  /* background texture: faint grid */
+  .grid-bg{
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+    background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+    background-size:64px 64px;
+    opacity:0.35;
+    mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
+  }
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(15,18,26,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:960px; margin:0 auto; padding:16px 28px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .brand{
+    font-family:var(--mono); font-size:13px; letter-spacing:0.06em;
+    color:var(--ink); text-decoration:none; font-weight:500;
+  }
+  .brand .dot{color:var(--amber);}
+  nav.links{display:flex; gap:28px; font-family:var(--mono); font-size:12.5px; letter-spacing:0.04em;}
+  nav.links a{text-decoration:none; color:var(--ink-dim); transition:color .2s ease; position:relative;}
+  nav.links a:hover, nav.links a:focus-visible{color:var(--ink);}
+  nav.links a::after{
+    content:''; position:absolute; left:0; bottom:-4px; width:0; height:1px; background:var(--amber);
+    transition:width .25s ease;
+  }
+  nav.links a:hover::after{width:100%;}
+  @media (max-width:640px){ nav.links{display:none;} }
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative; z-index:1; padding:88px 0 64px;}
+  .eyebrow{
+    font-family:var(--mono); font-size:12.5px; letter-spacing:0.12em;
+    color:var(--teal); text-transform:uppercase; margin-bottom:18px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:''; width:22px; height:1px; background:var(--teal);}
+  h1.name{
+    font-family:var(--display); font-weight:700;
+    font-size:clamp(38px, 6vw, 64px);
+    line-height:1.05; letter-spacing:-0.01em;
+    margin-bottom:14px;
+  }
+  .role{
+    font-family:var(--body); font-weight:500; font-size:clamp(16px,2.2vw,19px);
+    color:var(--ink-dim); max-width:520px; margin-bottom:36px;
+  }
+  .arabic-line{
+    font-family:var(--arabic); direction:rtl; text-align:right;
+    color:var(--ink-faint); font-size:14px; margin-top:-24px; margin-bottom:36px; max-width:520px;
+  }
+  .statusblock{
+    font-family:var(--mono); font-size:13px; line-height:2;
+    background:var(--bg-alt); border:1px solid var(--line);
+    border-left:2px solid var(--amber);
+    padding:18px 22px; max-width:560px; border-radius:var(--radius);
+  }
+  .statusblock .k{color:var(--ink-faint);}
+  .statusblock .v{color:var(--ink);}
+  .statusblock .prompt{color:var(--amber); margin-right:8px;}
+  .statusblock .accent{color:var(--teal);}
+
+  .hero-links{display:flex; flex-wrap:wrap; gap:12px; margin-top:28px;}
+  .btn{
+    font-family:var(--mono); font-size:12.5px; letter-spacing:0.03em;
+    padding:10px 18px; border-radius:var(--radius);
+    border:1px solid var(--line); text-decoration:none;
+    color:var(--ink); transition:all .2s ease; display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn:hover{border-color:var(--amber); color:var(--amber); transform:translateY(-1px);}
+  .btn.primary{background:var(--amber); color:#181103; border-color:var(--amber); font-weight:600;}
+  .btn.primary:hover{background:#f3b559; color:#181103;}
+
+  /* ---------- SECTION SHELL ---------- */
+  section{position:relative; z-index:1; padding:64px 0; border-top:1px solid var(--line);}
+  .sec-head{display:flex; align-items:baseline; justify-content:space-between; margin-bottom:36px; flex-wrap:wrap; gap:8px;}
+  .sec-title{font-family:var(--display); font-weight:600; font-size:clamp(22px,3vw,30px);}
+  .sec-title .num{font-family:var(--mono); color:var(--amber); font-size:14px; margin-right:10px; font-weight:500;}
+  .sec-title-ar{font-family:var(--arabic); direction:rtl; color:var(--ink-faint); font-size:15px;}
+
+  /* fade-in on scroll */
+  .reveal{opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:40px;}
+  @media (max-width:720px){ .about-grid{grid-template-columns:1fr;} }
+  .about-text p{color:var(--ink-dim); margin-bottom:16px; max-width:56ch;}
+  .about-text strong{color:var(--ink); font-weight:600;}
+  .edu-card{
+    background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+    padding:20px 22px;
+  }
+  .edu-card .deg{font-family:var(--display); font-weight:600; font-size:16px; margin-bottom:4px;}
+  .edu-card .school{color:var(--teal); font-family:var(--mono); font-size:12px; margin-bottom:12px;}
+  .edu-card .years{color:var(--ink-faint); font-family:var(--mono); font-size:11.5px; margin-bottom:14px;}
+  .edu-card ul{list-style:none; color:var(--ink-dim); font-size:13.5px;}
+  .edu-card li{padding-left:14px; position:relative; margin-bottom:6px;}
+  .edu-card li::before{content:'—'; position:absolute; left:0; color:var(--ink-faint);}
+
+  .certs{margin-top:22px;}
+  .certs .label{font-family:var(--mono); font-size:11px; letter-spacing:0.08em; color:var(--ink-faint); text-transform:uppercase; margin-bottom:10px;}
+  .chip-row{display:flex; flex-wrap:wrap; gap:8px;}
+  .chip{
+    font-family:var(--mono); font-size:12px; padding:6px 12px;
+    border:1px solid var(--line); border-radius:20px; color:var(--ink-dim);
+  }
+
+  /* ---------- SKILLS ---------- */
+  .skill-groups{display:grid; grid-template-columns:repeat(2,1fr); gap:28px 40px;}
+  @media (max-width:640px){ .skill-groups{grid-template-columns:1fr;} }
+  .skill-group .g-title{
+    font-family:var(--mono); font-size:12px; letter-spacing:0.06em; text-transform:uppercase;
+    color:var(--amber); margin-bottom:12px; padding-bottom:8px; border-bottom:1px solid var(--line);
+  }
+  .skill-group .tags{display:flex; flex-wrap:wrap; gap:8px;}
+  .tag{
+    font-family:var(--mono); font-size:12.5px; color:var(--ink-dim);
+    padding:5px 10px; background:var(--bg-alt); border:1px solid var(--line-soft); border-radius:var(--radius);
+    transition:border-color .2s ease, color .2s ease;
+  }
+  .tag:hover{border-color:var(--teal); color:var(--ink);}
+
+  /* ---------- PROJECTS ---------- */
+  .proj-card{
+    background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+    margin-bottom:16px; overflow:hidden;
+  }
+  .proj-head{
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+    padding:20px 22px; cursor:pointer; list-style:none;
+  }
+  .proj-head::-webkit-details-marker{display:none;}
+  .proj-head-left{display:flex; align-items:baseline; gap:14px; flex-wrap:wrap;}
+  .proj-id{font-family:var(--mono); font-size:11.5px; color:var(--ink-faint);}
+  .proj-title{font-family:var(--display); font-weight:600; font-size:17px;}
+  .proj-year{font-family:var(--mono); font-size:11.5px; color:var(--teal);}
+  .proj-toggle{
+    font-family:var(--mono); font-size:18px; color:var(--ink-faint); flex-shrink:0;
+    transition:transform .25s ease;
+  }
+  details[open] .proj-toggle{transform:rotate(45deg); color:var(--amber);}
+  .proj-org{font-family:var(--mono); font-size:11px; color:var(--ink-faint); padding:0 22px 14px; margin-top:-10px;}
+  .proj-body{padding:0 22px 22px;}
+  .stack-row{display:flex; flex-wrap:wrap; gap:7px; margin-bottom:16px;}
+  .stack-chip{
+    font-family:var(--mono); font-size:11.5px; color:var(--teal);
+    border:1px solid rgba(79,176,168,0.35); padding:4px 9px; border-radius:20px;
+  }
+  .proj-body ul{list-style:none;}
+  .proj-body li{
+    color:var(--ink-dim); font-size:14px; padding-left:16px; position:relative; margin-bottom:9px;
+  }
+  .proj-body li::before{content:'›'; position:absolute; left:0; color:var(--amber); font-family:var(--mono);}
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  footer{position:relative; z-index:1; padding:70px 0 50px; border-top:1px solid var(--line);}
+  .contact-title{
+    font-family:var(--display); font-weight:700; font-size:clamp(26px,4vw,38px);
+    margin-bottom:16px; max-width:520px;
+  }
+  .contact-sub{color:var(--ink-dim); max-width:480px; margin-bottom:32px;}
+  .contact-grid{display:flex; flex-wrap:wrap; gap:14px;}
+  .foot-bottom{
+    margin-top:56px; padding-top:24px; border-top:1px solid var(--line-soft);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+    font-family:var(--mono); font-size:11.5px; color:var(--ink-faint);
+  }
+</style>
 </head>
 <body>
-    <h1>GitHub Pages is working!</h1>
+<div class="grid-bg"></div>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#top">OMAR<span class="dot">.</span>DEV</a>
+    <nav class="links">
+      <a href="#about">ABOUT</a>
+      <a href="#skills">SKILLS</a>
+      <a href="#projects">PROJECTS</a>
+      <a href="#contact">CONTACT</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap" id="top">
+
+  <section class="hero" style="border-top:none;">
+    <div class="eyebrow">Computer Science · AI Specialization</div>
+    <h1 class="name">MHD Omar Oudeh</h1>
+    <p class="role">AI &amp; Full-Stack Developer building classification pipelines, RBAC-driven platforms, and cross-platform apps — currently reading for a CS degree at Arab International University, Syria.</p>
+    <div class="arabic-line">مطوّر full-stack ومهتم بالذكاء الاصطناعي، طالب علوم حاسوب في الجامعة الدولية الخاصة</div>
+
+    <div class="statusblock">
+      <div><span class="prompt">&gt;</span><span class="k">status      </span><span class="v accent">open_to_remote / internship</span></div>
+      <div><span class="prompt">&gt;</span><span class="k">location    </span><span class="v">Syria</span></div>
+      <div><span class="prompt">&gt;</span><span class="k">stack       </span><span class="v">Python · PHP · Dart · SQL · JavaScript</span></div>
+      <div><span class="prompt">&gt;</span><span class="k">focus       </span><span class="v">ML/AI · Backend Systems · Mobile Apps</span></div>
+      <div><span class="prompt">&gt;</span><span class="k">languages   </span><span class="v">Arabic (native) · English (C1)</span></div>
+    </div>
+
+    <div class="hero-links">
+      <a class="btn primary" href="https://github.com/MHD-OmarOudeh" target="_blank" rel="noopener">↗ GitHub</a>
+      <a class="btn" href="https://linkedin.com/in/mhd-omar-al-oudeh" target="_blank" rel="noopener">↗ LinkedIn</a>
+      <a class="btn" href="mailto:oumaroudeh@gmail.com">✉ Email</a>
+      <a class="btn" href="tel:+963984839553">☎ +963 98 483 9553</a>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="sec-head">
+      <div class="sec-title"><span class="num">01</span>About &amp; Education</div>
+      <div class="sec-title-ar">التعليم والشهادات</div>
+    </div>
+    <div class="about-grid reveal">
+      <div class="about-text">
+        <p>I'm a Computer Science student specializing in <strong>Artificial Intelligence</strong> at Arab International University, with a working range across <strong>machine learning</strong>, <strong>backend architecture</strong>, and <strong>mobile development</strong>. Most of my project work comes out of coursework — but it's built to production standards: clean layering, tested endpoints, documented pipelines.</p>
+        <p>I care about getting the fundamentals right — <strong>zero data-leakage</strong> pipelines in ML work, <strong>role-based access</strong> in every backend I ship, and bilingual Arabic/English support where it matters. Open to remote internships and research collaborations.</p>
+        <div class="certs">
+          <div class="label">Certifications</div>
+          <div class="chip-row">
+            <span class="chip">EF SET English — C1 Advanced</span>
+            <span class="chip">AI with Cloud &amp; Cybersecurity</span>
+            <span class="chip">Backend Dev with Laravel — Tamkeen</span>
+            <span class="chip">Intro to AI — Google / Coursera</span>
+          </div>
+        </div>
+      </div>
+      <div class="edu-card">
+        <div class="deg">B.Sc. Computer Science — AI Specialization</div>
+        <div class="school">Arab International University (AIU) · Syria</div>
+        <div class="years">2022 — Present</div>
+        <ul>
+          <li>Machine Learning Laboratory</li>
+          <li>Knowledge Discovery &amp; Data Mining (KDD)</li>
+          <li>Data Structures &amp; Algorithms</li>
+          <li>Mobile App Programming</li>
+          <li>Database Systems</li>
+          <li>Software Engineering</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="sec-head">
+      <div class="sec-title"><span class="num">02</span>Skills</div>
+      <div class="sec-title-ar">المهارات التقنية</div>
+    </div>
+    <div class="skill-groups reveal">
+      <div class="skill-group">
+        <div class="g-title">Languages</div>
+        <div class="tags">
+          <span class="tag">Python</span><span class="tag">PHP</span><span class="tag">Dart</span>
+          <span class="tag">SQL</span><span class="tag">Java</span><span class="tag">JavaScript</span><span class="tag">C#</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="g-title">ML &amp; Data Science</div>
+        <div class="tags">
+          <span class="tag">scikit-learn</span><span class="tag">NumPy</span><span class="tag">Pandas</span>
+          <span class="tag">Matplotlib</span><span class="tag">Seaborn</span><span class="tag">SMOTE</span>
+          <span class="tag">GridSearchCV</span><span class="tag">K-Means</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="g-title">Algorithms</div>
+        <div class="tags">
+          <span class="tag">Decision Trees</span><span class="tag">KNN</span><span class="tag">Naive Bayes</span>
+          <span class="tag">Logistic Regression</span><span class="tag">SVM</span><span class="tag">Linear Regression</span>
+          <span class="tag">Ensemble Learning</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="g-title">Backend</div>
+        <div class="tags">
+          <span class="tag">Laravel 12</span><span class="tag">ASP.NET</span><span class="tag">REST API</span>
+          <span class="tag">Sanctum</span><span class="tag">Passport OAuth2</span><span class="tag">Spatie RBAC</span>
+          <span class="tag">Stripe</span><span class="tag">Firebase FCM</span><span class="tag">DomPDF</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="g-title">Mobile &amp; Desktop</div>
+        <div class="tags">
+          <span class="tag">Flutter</span><span class="tag">sqflite</span><span class="tag">Navigator 2.0</span>
+          <span class="tag">Python Tkinter</span><span class="tag">ReportLab</span><span class="tag">OpenPyXL</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="g-title">Databases &amp; Architecture</div>
+        <div class="tags">
+          <span class="tag">MySQL</span><span class="tag">SQLite</span><span class="tag">Eloquent ORM</span>
+          <span class="tag">Clean Architecture</span><span class="tag">Service Layer</span><span class="tag">Observer Pattern</span>
+          <span class="tag">MVC / MVVM</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="sec-head">
+      <div class="sec-title"><span class="num">03</span>Projects</div>
+      <div class="sec-title-ar">المشاريع</div>
+    </div>
+
+    <div class="reveal">
+      <details class="proj-card" open>
+        <summary class="proj-head">
+          <div class="proj-head-left">
+            <span class="proj-id">PRJ-01</span>
+            <span class="proj-title">Kandura Store — E-Commerce Platform</span>
+            <span class="proj-year">2026</span>
+          </div>
+          <span class="proj-toggle">+</span>
+        </summary>
+        <div class="proj-org">Tamkin</div>
+        <div class="proj-body">
+          <div class="stack-row">
+            <span class="stack-chip">Laravel 12</span><span class="stack-chip">PHP 8.3</span>
+            <span class="stack-chip">MySQL</span><span class="stack-chip">Stripe</span>
+            <span class="stack-chip">Firebase FCM</span>
+          </div>
+          <ul>
+            <li>Full-stack platform for designing and ordering traditional Khaleeji Kandura — 40+ REST endpoints, Sanctum auth, Spatie RBAC (Super Admin / Admin / User) with policy-based authorization.</li>
+            <li>Stripe Checkout + webhooks, an in-app wallet (deposit / withdraw / auto-refund on cancellation), and Cash on Delivery unified in one payment system.</li>
+            <li>Smart coupon engine (percentage &amp; fixed, usage limits, per-user, auto-expiry) plus a star-rating &amp; reviews module.</li>
+            <li>Real-time push notifications via Firebase FCM through a queue-based async pipeline; auto-generated Arabic/English RTL PDF invoices via DomPDF.</li>
+            <li>Architected with 15 models, 25+ controllers, 8 service classes, 4 security policies, observer pattern, event-driven listeners, over a 30-table normalized schema.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="proj-card">
+        <summary class="proj-head">
+          <div class="proj-head-left">
+            <span class="proj-id">PRJ-02</span>
+            <span class="proj-title">Heart Disease Classification — ML Laboratory</span>
+            <span class="proj-year">2024–2025</span>
+          </div>
+          <span class="proj-toggle">+</span>
+        </summary>
+        <div class="proj-org">AIU — ML Lab Course</div>
+        <div class="proj-body">
+          <div class="stack-row">
+            <span class="stack-chip">Python</span><span class="stack-chip">NumPy</span>
+            <span class="stack-chip">scikit-learn</span><span class="stack-chip">Matplotlib</span>
+          </div>
+          <ul>
+            <li>Built and compared KNN (from scratch), SVM (RBF kernel), and Random Forest (100+ trees) on the UCI Cleveland Heart Disease dataset (297 samples, 13 features).</li>
+            <li>Full pipeline: EDA, missing-value handling, stratified 60/20/20 split, StandardScaler fit strictly on training data — zero data leakage.</li>
+            <li>Hyperparameter tuning and error analysis with feature-importance extraction.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="proj-card">
+        <summary class="proj-head">
+          <div class="proj-head-left">
+            <span class="proj-id">PRJ-03</span>
+            <span class="proj-title">KDD Lab Final Project — Classification, Regression &amp; Clustering</span>
+            <span class="proj-year">2024–2025</span>
+          </div>
+          <span class="proj-toggle">+</span>
+        </summary>
+        <div class="proj-org">AIU — KDD Lab Course</div>
+        <div class="proj-body">
+          <div class="stack-row">
+            <span class="stack-chip">Python</span><span class="stack-chip">scikit-learn</span>
+            <span class="stack-chip">SMOTE</span><span class="stack-chip">GridSearchCV</span><span class="stack-chip">K-Means</span>
+          </div>
+          <ul>
+            <li>Classification (Heart Disease): KNN + Decision Tree with GridSearchCV and SMOTE oversampling on the Cleveland dataset, 303 instances.</li>
+            <li>Regression (Bike Sharing Demand): Linear Regression + Decision Tree Regressor with engineered interaction features, evaluated via RMSE / MAE / R².</li>
+            <li>Clustering (Japanese Universities): K-Means over 813 universities, 22 features — optimal K chosen via Elbow Method + Silhouette Score, clusters profiled by size, reputation, and difficulty.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="proj-card">
+        <summary class="proj-head">
+          <div class="proj-head-left">
+            <span class="proj-id">PRJ-04</span>
+            <span class="proj-title">Gym Management System</span>
+            <span class="proj-year">2024–2025</span>
+          </div>
+          <span class="proj-toggle">+</span>
+        </summary>
+        <div class="proj-org">AIU — Mobile App Programming Course</div>
+        <div class="proj-body">
+          <div class="stack-row">
+            <span class="stack-chip">Flutter</span><span class="stack-chip">Dart</span><span class="stack-chip">SQLite</span>
+          </div>
+          <ul>
+            <li>Cross-platform mobile app with role-based access (Admin, Receptionist, Coach); full CRUD via sqflite for members, attendance, payments, and training sessions.</li>
+            <li>Custom dark navy &amp; orange UI across 15+ screens with role-specific dashboards; image_picker for member photo upload.</li>
+            <li>Produced full SRS documentation covering functional requirements, data models, and system architecture.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="proj-card">
+        <summary class="proj-head">
+          <div class="proj-head-left">
+            <span class="proj-id">PRJ-05</span>
+            <span class="proj-title">Hospital Management System</span>
+            <span class="proj-year">2026</span>
+          </div>
+          <span class="proj-toggle">+</span>
+        </summary>
+        <div class="proj-org">AIU — Programming Languages Course</div>
+        <div class="proj-body">
+          <div class="stack-row">
+            <span class="stack-chip">Python</span><span class="stack-chip">Tkinter</span>
+            <span class="stack-chip">SQLite</span><span class="stack-chip">ReportLab</span><span class="stack-chip">OpenPyXL</span>
+          </div>
+          <ul>
+            <li>Desktop GUI for hospital operations: doctor and patient records, doctor-patient assignment, specialty/disease-based search, SHA-256 hashed login.</li>
+            <li>Data validation, auto-generated IDs, report export to PDF (ReportLab) and Excel (OpenPyXL).</li>
+            <li>SQLite schema designed with foreign-key relationships.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="proj-card">
+        <summary class="proj-head">
+          <div class="proj-head-left">
+            <span class="proj-id">PRJ-06</span>
+            <span class="proj-title">Service Provider Platform</span>
+            <span class="proj-year">2026</span>
+          </div>
+          <span class="proj-toggle">+</span>
+        </summary>
+        <div class="proj-org">Tamkin</div>
+        <div class="proj-body">
+          <div class="stack-row">
+            <span class="stack-chip">Laravel 12</span><span class="stack-chip">PHP 8.2</span>
+            <span class="stack-chip">Passport OAuth2</span><span class="stack-chip">Blade</span>
+          </div>
+          <ul>
+            <li>Marketplace platform with a three-role system: Admin / Client / Provider.</li>
+            <li>Laravel Passport OAuth2 authentication, hierarchical category management, API resources, and PHPUnit feature tests.</li>
+          </ul>
+        </div>
+      </details>
+    </div>
+  </section>
+
+</div>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="contact-title reveal">Let's build something worth shipping.</div>
+    <p class="contact-sub reveal">Open to remote internships, freelance work, and research collaborations in AI/ML or full-stack development.</p>
+    <div class="contact-grid reveal">
+      <a class="btn primary" href="mailto:oumaroudeh@gmail.com">✉ oumaroudeh@gmail.com</a>
+      <a class="btn" href="https://github.com/MHD-OmarOudeh" target="_blank" rel="noopener">↗ github.com/MHD-OmarOudeh</a>
+      <a class="btn" href="https://linkedin.com/in/mhd-omar-al-oudeh" target="_blank" rel="noopener">↗ LinkedIn</a>
+      <a class="btn" href="tel:+963984839553">☎ +963 98 483 9553</a>
+    </div>
+    <div class="foot-bottom">
+      <span>MHD Omar Oudeh — Syria</span>
+      <span>References available upon request</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
 </body>
 </html>
