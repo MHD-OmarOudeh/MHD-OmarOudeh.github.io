@@ -380,176 +380,194 @@ footer{border-top:1px solid var(--blue-line-strong); padding:64px 0 0;}
       </div>
     </section>
 
-    <section id="projects">
-      <div class="sec-head">
-        <span class="sec-num">03</span>
-        <div class="sec-title">Projects</div>
-        <div class="sec-title-ar">المشاريع</div>
+<section id="projects">
+  <div class="sec-head">
+    <span class="sec-num">03</span>
+    <div class="sec-title">Projects</div>
+    <div class="sec-title-ar">المشاريع</div>
+  </div>
+
+  <div class="dim"><div class="arm"></div><div class="label">2024 — 2026</div><div class="arm"></div></div>
+
+  <div class="reveal">
+
+    <!-- SHEET 01 -->
+    <details class="sheet" open>
+      <summary class="sheet-top">
+        <div class="sheet-top-left">
+          <span class="sheet-no">SHEET 01</span>
+          <span class="sheet-title">Kandura Store — E-Commerce Platform</span>
+        </div>
+        <span class="sheet-toggle">+</span>
+      </summary>
+      <div class="sheet-meta">
+        <div><b>CLIENT</b> Tamkin</div>
+        <div><b>YEAR</b> 2026</div>
+        <div><b>TYPE</b> Full-stack platform</div>
       </div>
-
-      <div class="dim"><div class="arm"></div><div class="label">2024 — 2026</div><div class="arm"></div></div>
-
-      <div class="reveal">
-
-        <details class="sheet" open>
-          <summary class="sheet-top">
-            <div class="sheet-top-left">
-              <span class="sheet-no">SHEET 01</span>
-              <span class="sheet-title">Kandura Store — E-Commerce Platform</span>
-            </div>
-            <span class="sheet-toggle">+</span>
-          </summary>
-          <div class="sheet-meta">
-            <div><b>CLIENT</b> Tamkin</div>
-            <div><b>YEAR</b> 2026</div>
-            <div><b>TYPE</b> Full-stack platform</div>
-          </div>
-          <div class="sheet-body">
-            <div class="stack-cloud"><span>Laravel 12</span><span>PHP 8.3</span><span>MySQL</span><span>Stripe</span><span>Firebase FCM</span></div>
-            <ul>
-              <li>Platform for designing and ordering traditional Khaleeji Kandura — 40+ REST endpoints, Sanctum auth, Spatie RBAC (Super Admin / Admin / User) with policy-based authorization.</li>
-              <li>Stripe Checkout + webhooks, an in-app wallet (deposit / withdraw / auto-refund on cancellation), and Cash on Delivery unified in one payment system.</li>
-              <li>Smart coupon engine (percentage &amp; fixed, usage limits, per-user, auto-expiry) plus a star-rating &amp; reviews module.</li>
-              <li>Real-time push notifications via Firebase FCM through a queue-based async pipeline; auto-generated Arabic/English RTL PDF invoices via DomPDF.</li>
-              <li>15 models, 25+ controllers, 8 service classes, 4 security policies, observer pattern, event-driven listeners, over a 30-table normalized schema.</li>
-            </ul>
-          </div>
-          <div class="sheet-footer">
-            <a class="repo-btn pending" title="Send me the repo link and I'll wire it in">SOURCE — LINK PENDING</a>
-          </div>
-        </details>
-
-        <details class="sheet">
-          <summary class="sheet-top">
-            <div class="sheet-top-left">
-              <span class="sheet-no">SHEET 02</span>
-              <span class="sheet-title">Heart Disease Classification</span>
-            </div>
-            <span class="sheet-toggle">+</span>
-          </summary>
-          <div class="sheet-meta">
-            <div><b>COURSE</b> AIU — ML Lab</div>
-            <div><b>YEAR</b> 2024–2025</div>
-            <div><b>TYPE</b> Supervised learning</div>
-          </div>
-          <div class="sheet-body">
-            <div class="stack-cloud"><span>Python</span><span>NumPy</span><span>scikit-learn</span><span>Matplotlib</span></div>
-            <ul>
-              <li>Built and compared KNN (from scratch), SVM (RBF kernel), and Random Forest (100+ trees) on the UCI Cleveland dataset — 297 samples, 13 features.</li>
-              <li>Full pipeline: EDA, missing-value handling, stratified 60/20/20 split, StandardScaler fit strictly on training data — zero data leakage.</li>
-              <li>Hyperparameter tuning and error analysis with feature-importance extraction.</li>
-            </ul>
-          </div>
-          <div class="sheet-footer">
-            <a class="repo-btn pending" title="Send me the repo link and I'll wire it in">SOURCE — LINK PENDING</a>
-          </div>
-        </details>
-
-        <details class="sheet">
-          <summary class="sheet-top">
-            <div class="sheet-top-left">
-              <span class="sheet-no">SHEET 03</span>
-              <span class="sheet-title">KDD Final Project</span>
-            </div>
-            <span class="sheet-toggle">+</span>
-          </summary>
-          <div class="sheet-meta">
-            <div><b>COURSE</b> AIU — KDD Lab</div>
-            <div><b>YEAR</b> 2024–2025</div>
-            <div><b>TYPE</b> Classification · Regression · Clustering</div>
-          </div>
-          <div class="sheet-body">
-            <div class="stack-cloud"><span>Python</span><span>scikit-learn</span><span>SMOTE</span><span>GridSearchCV</span><span>K-Means</span></div>
-            <ul>
-              <li>Classification (Heart Disease): KNN + Decision Tree with GridSearchCV and SMOTE oversampling — 303 instances.</li>
-              <li>Regression (Bike Sharing Demand): Linear Regression + Decision Tree Regressor with engineered interaction features, evaluated via RMSE / MAE / R².</li>
-              <li>Clustering (Japanese Universities): K-Means over 813 universities, 22 features — optimal K via Elbow Method + Silhouette Score.</li>
-            </ul>
-          </div>
-          <div class="sheet-footer">
-            <a class="repo-btn pending" title="Send me the repo link and I'll wire it in">SOURCE — LINK PENDING</a>
-          </div>
-        </details>
-
-        <details class="sheet">
-          <summary class="sheet-top">
-            <div class="sheet-top-left">
-              <span class="sheet-no">SHEET 04</span>
-              <span class="sheet-title">Gym Management System</span>
-            </div>
-            <span class="sheet-toggle">+</span>
-          </summary>
-          <div class="sheet-meta">
-            <div><b>COURSE</b> AIU — Mobile App Programming</div>
-            <div><b>YEAR</b> 2024–2025</div>
-            <div><b>TYPE</b> Cross-platform mobile</div>
-          </div>
-          <div class="sheet-body">
-            <div class="stack-cloud"><span>Flutter</span><span>Dart</span><span>SQLite</span></div>
-            <ul>
-              <li>Role-based access (Admin, Receptionist, Coach); full CRUD via sqflite for members, attendance, payments, and training sessions.</li>
-              <li>Custom dark navy &amp; orange UI across 15+ screens with role-specific dashboards; image_picker for member photo upload.</li>
-              <li>Full SRS documentation covering functional requirements, data models, and system architecture.</li>
-            </ul>
-          </div>
-          <div class="sheet-footer">
-            <a class="repo-btn pending" title="Send me the repo link and I'll wire it in">SOURCE — LINK PENDING</a>
-          </div>
-        </details>
-
-        <details class="sheet">
-          <summary class="sheet-top">
-            <div class="sheet-top-left">
-              <span class="sheet-no">SHEET 05</span>
-              <span class="sheet-title">Hospital Management System</span>
-            </div>
-            <span class="sheet-toggle">+</span>
-          </summary>
-          <div class="sheet-meta">
-            <div><b>COURSE</b> AIU — Programming Languages</div>
-            <div><b>YEAR</b> 2026</div>
-            <div><b>TYPE</b> Desktop GUI</div>
-          </div>
-          <div class="sheet-body">
-            <div class="stack-cloud"><span>Python</span><span>Tkinter</span><span>SQLite</span><span>ReportLab</span><span>OpenPyXL</span></div>
-            <ul>
-              <li>Doctor and patient records, doctor-patient assignment, specialty/disease-based search, SHA-256 hashed login.</li>
-              <li>Data validation, auto-generated IDs, report export to PDF (ReportLab) and Excel (OpenPyXL).</li>
-              <li>SQLite schema designed with foreign-key relationships.</li>
-            </ul>
-          </div>
-          <div class="sheet-footer">
-            <a class="repo-btn pending" title="Send me the repo link and I'll wire it in">SOURCE — LINK PENDING</a>
-          </div>
-        </details>
-
-        <details class="sheet">
-          <summary class="sheet-top">
-            <div class="sheet-top-left">
-              <span class="sheet-no">SHEET 06</span>
-              <span class="sheet-title">Service Provider Platform</span>
-            </div>
-            <span class="sheet-toggle">+</span>
-          </summary>
-          <div class="sheet-meta">
-            <div><b>CLIENT</b> Tamkin</div>
-            <div><b>YEAR</b> 2026</div>
-            <div><b>TYPE</b> Marketplace platform</div>
-          </div>
-          <div class="sheet-body">
-            <div class="stack-cloud"><span>Laravel 12</span><span>PHP 8.2</span><span>Passport OAuth2</span><span>Blade</span></div>
-            <ul>
-              <li>Three-role system: Admin / Client / Provider.</li>
-              <li>Laravel Passport OAuth2 authentication, hierarchical category management, API resources, and PHPUnit feature tests.</li>
-            </ul>
-          </div>
-          <div class="sheet-footer">
-            <a class="repo-btn pending" title="Send me the repo link and I'll wire it in">SOURCE — LINK PENDING</a>
-          </div>
-        </details>
-
+      <div class="sheet-body">
+        <div class="stack-cloud"><span>Laravel 12</span><span>PHP 8.3</span><span>MySQL</span><span>Stripe</span><span>Firebase FCM</span></div>
+        <ul>
+          <li>Platform for designing and ordering traditional Khaleeji Kandura — 40+ REST endpoints, Sanctum auth, Spatie RBAC (Super Admin / Admin / User) with policy-based authorization.</li>
+          <li>Stripe Checkout + webhooks, an in-app wallet (deposit / withdraw / auto-refund on cancellation), and Cash on Delivery unified in one payment system.</li>
+          <li>Smart coupon engine (percentage & fixed, usage limits, per-user, auto-expiry) plus a star-rating & reviews module.</li>
+          <li>Real-time push notifications via Firebase FCM through a queue-based async pipeline; auto-generated Arabic/English RTL PDF invoices via DomPDF.</li>
+          <li>15 models, 25+ controllers, 8 service classes, 4 security policies, observer pattern, event-driven listeners, over a 30-table normalized schema.</li>
+        </ul>
       </div>
-    </section>
+      <div class="sheet-footer">
+        <a class="repo-btn" href="https://github.com/MHD-OmarOudeh/KANDURA_LARAVEL-PROJECT" target="_blank">
+          SOURCE — VIEW REPO
+        </a>
+      </div>
+    </details>
+
+    <!-- SHEET 02 -->
+    <details class="sheet">
+      <summary class="sheet-top">
+        <div class="sheet-top-left">
+          <span class="sheet-no">SHEET 02</span>
+          <span class="sheet-title">Heart Disease Classification</span>
+        </div>
+        <span class="sheet-toggle">+</span>
+      </summary>
+      <div class="sheet-meta">
+        <div><b>COURSE</b> AIU — ML Lab</div>
+        <div><b>YEAR</b> 2024–2025</div>
+        <div><b>TYPE</b> Supervised learning</div>
+      </div>
+      <div class="sheet-body">
+        <div class="stack-cloud"><span>Python</span><span>NumPy</span><span>scikit-learn</span><span>Matplotlib</span></div>
+        <ul>
+          <li>Built and compared KNN (from scratch), SVM (RBF kernel), and Random Forest (100+ trees) on the UCI Cleveland dataset — 297 samples, 13 features.</li>
+          <li>Full pipeline: EDA, missing-value handling, stratified 60/20/20 split, StandardScaler fit strictly on training data — zero data leakage.</li>
+          <li>Hyperparameter tuning and error analysis with feature-importance extraction.</li>
+        </ul>
+      </div>
+      <div class="sheet-footer">
+        <a class="repo-btn" href="https://github.com/MHD-OmarOudeh/Machine-Learning-Project" target="_blank">
+          SOURCE — VIEW REPO
+        </a>
+      </div>
+    </details>
+
+    <!-- SHEET 03 -->
+    <details class="sheet">
+      <summary class="sheet-top">
+        <div class="sheet-top-left">
+          <span class="sheet-no">SHEET 03</span>
+          <span class="sheet-title">KDD Final Project</span>
+        </div>
+        <span class="sheet-toggle">+</span>
+      </summary>
+      <div class="sheet-meta">
+        <div><b>COURSE</b> AIU — KDD Lab</div>
+        <div><b>YEAR</b> 2024–2025</div>
+        <div><b>TYPE</b> Classification · Regression · Clustering</div>
+      </div>
+      <div class="sheet-body">
+        <div class="stack-cloud"><span>Python</span><span>scikit-learn</span><span>SMOTE</span><span>GridSearchCV</span><span>K-Means</span></div>
+        <ul>
+          <li>Classification (Heart Disease): KNN + Decision Tree with GridSearchCV and SMOTE oversampling — 303 instances.</li>
+          <li>Regression (Bike Sharing Demand): Linear Regression + Decision Tree Regressor with engineered interaction features, evaluated via RMSE / MAE / R².</li>
+          <li>Clustering (Japanese Universities): K-Means over 813 universities, 22 features — optimal K via Elbow Method + Silhouette Score.</li>
+        </ul>
+      </div>
+      <div class="sheet-footer">
+        <a class="repo-btn" href="https://github.com/MHD-OmarOudeh/Knowledge-Discovery-and-Data-Mining-Final-Project" target="_blank">
+          SOURCE — VIEW REPO
+        </a>
+      </div>
+    </details>
+
+    <!-- SHEET 04 -->
+    <details class="sheet">
+      <summary class="sheet-top">
+        <div class="sheet-top-left">
+          <span class="sheet-no">SHEET 04</span>
+          <span class="sheet-title">Gym Management System</span>
+        </div>
+        <span class="sheet-toggle">+</span>
+      </summary>
+      <div class="sheet-meta">
+        <div><b>COURSE</b> AIU — Mobile App Programming</div>
+        <div><b>YEAR</b> 2024–2025</div>
+        <div><b>TYPE</b> Cross-platform mobile</div>
+      </div>
+      <div class="sheet-body">
+        <div class="stack-cloud"><span>Flutter</span><span>Dart</span><span>SQLite</span></div>
+        <ul>
+          <li>Role-based access (Admin, Receptionist, Coach); full CRUD via sqflite for members, attendance, payments, and training sessions.</li>
+          <li>Custom dark navy & orange UI across 15+ screens with role-specific dashboards; image_picker for member photo upload.</li>
+          <li>Full SRS documentation covering functional requirements, data models, and system architecture.</li>
+        </ul>
+      </div>
+      <div class="sheet-footer">
+        <a class="repo-btn" href="https://github.com/MHD-OmarOudeh/Gym-Pro-professional-Flutter-based-gym-management-system" target="_blank">
+          SOURCE — VIEW REPO
+        </a>
+      </div>
+    </details>
+
+    <!-- SHEET 05 -->
+    <details class="sheet">
+      <summary class="sheet-top">
+        <div class="sheet-top-left">
+          <span class="sheet-no">SHEET 05</span>
+          <span class="sheet-title">Hospital Management System</span>
+        </div>
+        <span class="sheet-toggle">+</span>
+      </summary>
+      <div class="sheet-meta">
+        <div><b>COURSE</b> AIU — Programming Languages</div>
+        <div><b>YEAR</b> 2026</div>
+        <div><b>TYPE</b> Desktop GUI</div>
+      </div>
+      <div class="sheet-body">
+        <div class="stack-cloud"><span>Python</span><span>Tkinter</span><span>SQLite</span><span>ReportLab</span><span>OpenPyXL</span></div>
+        <ul>
+          <li>Doctor and patient records, doctor-patient assignment, specialty/disease-based search, SHA-256 hashed login.</li>
+          <li>Data validation, auto-generated IDs, report export to PDF (ReportLab) and Excel (OpenPyXL).</li>
+          <li>SQLite schema designed with foreign-key relationships.</li>
+        </ul>
+      </div>
+      <div class="sheet-footer">
+        <a class="repo-btn" href="https://github.com/MHD-OmarOudeh/Python-Based-Hospital-Management-System-PL-Project-" target="_blank">
+          SOURCE — VIEW REPO
+        </a>
+      </div>
+    </details>
+
+    <!-- SHEET 06 -->
+    <details class="sheet">
+      <summary class="sheet-top">
+        <div class="sheet-top-left">
+          <span class="sheet-no">SHEET 06</span>
+          <span class="sheet-title">Service Provider Platform</span>
+        </div>
+        <span class="sheet-toggle">+</span>
+      </summary>
+      <div class="sheet-meta">
+        <div><b>CLIENT</b> Tamkin</div>
+        <div><b>YEAR</b> 2026</div>
+        <div><b>TYPE</b> Marketplace platform</div>
+      </div>
+      <div class="sheet-body">
+        <div class="stack-cloud"><span>Laravel 12</span><span>PHP 8.2</span><span>Passport OAuth2</span><span>Blade</span></div>
+        <ul>
+          <li>Three-role system: Admin / Client / Provider.</li>
+          <li>Laravel Passport OAuth2 authentication, hierarchical category management, API resources, and PHPUnit feature tests.</li>
+        </ul>
+      </div>
+      <div class="sheet-footer">
+        <a class="repo-btn" href="https://github.com/MHD-OmarOudeh/service-provider-laravel-bootcamp" target="_blank">
+          SOURCE — VIEW REPO
+        </a>
+      </div>
+    </details>
+
+  </div>
+</section>
 
   </div>
 
