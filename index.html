@@ -6,515 +6,573 @@
 <title>MHD Omar Oudeh — Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@500;600&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg:#0f121a;
-    --bg-alt:#151a24;
-    --card:#171d29;
-    --ink:#edf0f3;
-    --ink-dim:#8a93a6;
-    --ink-faint:#5a6274;
-    --amber:#e8a33d;
-    --teal:#4fb0a8;
-    --line:#262c3a;
-    --line-soft:#1e2432;
-    --radius:2px;
-    --display: 'Space Grotesk', sans-serif;
-    --mono: 'JetBrains Mono', monospace;
-    --body: 'Inter', sans-serif;
-    --arabic: 'IBM Plex Sans Arabic', sans-serif;
-  }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
-  @media (prefers-reduced-motion: reduce){
-    html{scroll-behavior:auto;}
-    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
-  }
-  body{
-    background:var(--bg);
-    color:var(--ink);
-    font-family:var(--body);
-    line-height:1.6;
-    font-size:16px;
-    -webkit-font-smoothing:antialiased;
-  }
-  .wrap{max-width:960px; margin:0 auto; padding:0 28px;}
-  a{color:inherit;}
+:root{
+  --blue-deep:#0b2340;
+  --blue-mid:#123259;
+  --blue-panel:#0f2c4e;
+  --blue-line:rgba(127,177,214,0.22);
+  --blue-line-strong:rgba(159,197,227,0.42);
+  --paper:#eaf1f7;
+  --paper-dim:#93aec7;
+  --paper-faint:#5d7997;
+  --red:#e2603f;
+  --red-dim:rgba(226,96,63,0.5);
+  --display:'Barlow Condensed',sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+  --body:'Source Sans 3',sans-serif;
+  --arabic:'IBM Plex Sans Arabic',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;} *{animation-duration:.001ms !important;transition-duration:.001ms !important;}}
+body{
+  background:var(--blue-deep);
+  color:var(--paper);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;}
+:focus-visible{outline:1px solid var(--red); outline-offset:3px;}
 
-  /* background texture: faint grid */
-  .grid-bg{
-    position:fixed; inset:0; z-index:0; pointer-events:none;
-    background-image:
-      linear-gradient(var(--line-soft) 1px, transparent 1px),
-      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
-    background-size:64px 64px;
-    opacity:0.35;
-    mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
-  }
+/* ---- blueprint grid backdrop ---- */
+.bp-grid{
+  position:fixed; inset:0; z-index:0; pointer-events:none;
+  background-image:
+    linear-gradient(var(--blue-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--blue-line) 1px, transparent 1px),
+    linear-gradient(var(--blue-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--blue-line) 1px, transparent 1px);
+  background-size:88px 88px, 88px 88px, 22px 22px, 22px 22px;
+  background-position:-1px -1px, -1px -1px, -1px -1px, -1px -1px;
+  opacity:0.5;
+}
+.bp-grid::after{
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse 70% 55% at 50% 0%, transparent 0%, var(--blue-deep) 78%);
+}
 
-  /* ---------- NAV ---------- */
-  header.nav{
-    position:sticky; top:0; z-index:50;
-    background:rgba(15,18,26,0.86);
-    backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--line);
-  }
-  .nav-inner{
-    max-width:960px; margin:0 auto; padding:16px 28px;
-    display:flex; align-items:center; justify-content:space-between;
-  }
-  .brand{
-    font-family:var(--mono); font-size:13px; letter-spacing:0.06em;
-    color:var(--ink); text-decoration:none; font-weight:500;
-  }
-  .brand .dot{color:var(--amber);}
-  nav.links{display:flex; gap:28px; font-family:var(--mono); font-size:12.5px; letter-spacing:0.04em;}
-  nav.links a{text-decoration:none; color:var(--ink-dim); transition:color .2s ease; position:relative;}
-  nav.links a:hover, nav.links a:focus-visible{color:var(--ink);}
-  nav.links a::after{
-    content:''; position:absolute; left:0; bottom:-4px; width:0; height:1px; background:var(--amber);
-    transition:width .25s ease;
-  }
-  nav.links a:hover::after{width:100%;}
-  @media (max-width:640px){ nav.links{display:none;} }
+/* ---- sheet frame ---- */
+.frame{
+  position:relative; z-index:1;
+  margin:14px; border:1px solid var(--blue-line-strong);
+}
+@media (max-width:640px){ .frame{margin:8px;} }
+.frame::before, .frame::after,
+.corner-bl, .corner-br{
+  content:''; position:fixed; width:16px; height:16px; z-index:5; pointer-events:none;
+}
+.crosshair{position:fixed; width:18px; height:18px; z-index:6; pointer-events:none;}
+.crosshair::before, .crosshair::after{content:''; position:absolute; background:var(--paper-faint);}
+.crosshair::before{width:100%; height:1px; top:50%;}
+.crosshair::after{width:1px; height:100%; left:50%;}
+.crosshair.tl{top:10px; left:10px;} .crosshair.tr{top:10px; right:10px;}
+.crosshair.bl{bottom:10px; left:10px;} .crosshair.br{bottom:10px; right:10px;}
 
-  /* ---------- HERO ---------- */
-  .hero{position:relative; z-index:1; padding:88px 0 64px;}
-  .eyebrow{
-    font-family:var(--mono); font-size:12.5px; letter-spacing:0.12em;
-    color:var(--teal); text-transform:uppercase; margin-bottom:18px;
-    display:flex; align-items:center; gap:10px;
-  }
-  .eyebrow::before{content:''; width:22px; height:1px; background:var(--teal);}
-  h1.name{
-    font-family:var(--display); font-weight:700;
-    font-size:clamp(38px, 6vw, 64px);
-    line-height:1.05; letter-spacing:-0.01em;
-    margin-bottom:14px;
-  }
-  .role{
-    font-family:var(--body); font-weight:500; font-size:clamp(16px,2.2vw,19px);
-    color:var(--ink-dim); max-width:520px; margin-bottom:36px;
-  }
-  .arabic-line{
-    font-family:var(--arabic); direction:rtl; text-align:right;
-    color:var(--ink-faint); font-size:14px; margin-top:-24px; margin-bottom:36px; max-width:520px;
-  }
-  .statusblock{
-    font-family:var(--mono); font-size:13px; line-height:2;
-    background:var(--bg-alt); border:1px solid var(--line);
-    border-left:2px solid var(--amber);
-    padding:18px 22px; max-width:560px; border-radius:var(--radius);
-  }
-  .statusblock .k{color:var(--ink-faint);}
-  .statusblock .v{color:var(--ink);}
-  .statusblock .prompt{color:var(--amber); margin-right:8px;}
-  .statusblock .accent{color:var(--teal);}
+.wrap{max-width:900px; margin:0 auto; padding:0 30px;}
 
-  .hero-links{display:flex; flex-wrap:wrap; gap:12px; margin-top:28px;}
-  .btn{
-    font-family:var(--mono); font-size:12.5px; letter-spacing:0.03em;
-    padding:10px 18px; border-radius:var(--radius);
-    border:1px solid var(--line); text-decoration:none;
-    color:var(--ink); transition:all .2s ease; display:inline-flex; align-items:center; gap:8px;
-  }
-  .btn:hover{border-color:var(--amber); color:var(--amber); transform:translateY(-1px);}
-  .btn.primary{background:var(--amber); color:#181103; border-color:var(--amber); font-weight:600;}
-  .btn.primary:hover{background:#f3b559; color:#181103;}
+/* ---- titleblock top bar ---- */
+.titlebar{
+  border-bottom:1px solid var(--blue-line-strong);
+  font-family:var(--mono); font-size:10.5px; letter-spacing:0.05em; color:var(--paper-faint);
+}
+.titlebar .wrap{display:flex; justify-content:space-between; align-items:center; padding:11px 30px; flex-wrap:wrap; gap:6px;}
+.titlebar span b{color:var(--paper-dim); font-weight:500;}
+.titlebar .sep{opacity:0.4; margin:0 10px;}
+@media (max-width:720px){ .titlebar .hide-sm{display:none;} }
 
-  /* ---------- SECTION SHELL ---------- */
-  section{position:relative; z-index:1; padding:64px 0; border-top:1px solid var(--line);}
-  .sec-head{display:flex; align-items:baseline; justify-content:space-between; margin-bottom:36px; flex-wrap:wrap; gap:8px;}
-  .sec-title{font-family:var(--display); font-weight:600; font-size:clamp(22px,3vw,30px);}
-  .sec-title .num{font-family:var(--mono); color:var(--amber); font-size:14px; margin-right:10px; font-weight:500;}
-  .sec-title-ar{font-family:var(--arabic); direction:rtl; color:var(--ink-faint); font-size:15px;}
+/* ---- nav ---- */
+nav.top{
+  position:sticky; top:0; z-index:40;
+  background:rgba(11,35,64,0.88); backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--blue-line-strong);
+}
+nav.top .wrap{display:flex; justify-content:space-between; align-items:center; padding:14px 30px;}
+.mark{font-family:var(--display); font-weight:700; font-size:19px; letter-spacing:0.02em;}
+.mark .red-dot{color:var(--red);}
+.navlinks{display:flex; gap:26px; font-family:var(--mono); font-size:11px; letter-spacing:0.06em;}
+.navlinks a{text-decoration:none; color:var(--paper-dim); transition:color .2s;}
+.navlinks a:hover{color:var(--paper);}
+@media (max-width:640px){ .navlinks{display:none;} }
 
-  /* fade-in on scroll */
-  .reveal{opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease;}
-  .reveal.in{opacity:1; transform:translateY(0);}
+/* ---- dimension line ---- */
+.dim{
+  display:flex; align-items:center; gap:10px;
+  font-family:var(--mono); font-size:10.5px; letter-spacing:0.08em; color:var(--paper-faint);
+  margin:26px 0;
+}
+.dim .arm{flex:1; height:1px; background:var(--blue-line-strong); position:relative;}
+.dim .arm::before, .dim .arm::after{
+  content:''; position:absolute; top:-3px; width:1px; height:7px; background:var(--blue-line-strong);
+}
+.dim .arm::before{left:0;} .dim .arm::after{right:0;}
+.dim .label{white-space:nowrap;}
 
-  /* ---------- ABOUT ---------- */
-  .about-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:40px;}
-  @media (max-width:720px){ .about-grid{grid-template-columns:1fr;} }
-  .about-text p{color:var(--ink-dim); margin-bottom:16px; max-width:56ch;}
-  .about-text strong{color:var(--ink); font-weight:600;}
-  .edu-card{
-    background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
-    padding:20px 22px;
-  }
-  .edu-card .deg{font-family:var(--display); font-weight:600; font-size:16px; margin-bottom:4px;}
-  .edu-card .school{color:var(--teal); font-family:var(--mono); font-size:12px; margin-bottom:12px;}
-  .edu-card .years{color:var(--ink-faint); font-family:var(--mono); font-size:11.5px; margin-bottom:14px;}
-  .edu-card ul{list-style:none; color:var(--ink-dim); font-size:13.5px;}
-  .edu-card li{padding-left:14px; position:relative; margin-bottom:6px;}
-  .edu-card li::before{content:'—'; position:absolute; left:0; color:var(--ink-faint);}
+/* ---- hero ---- */
+.hero{padding:70px 0 46px; position:relative;}
+.eyebrow{
+  font-family:var(--mono); font-size:11px; letter-spacing:0.14em; text-transform:uppercase;
+  color:var(--red); margin-bottom:20px;
+}
+h1.name{
+  font-family:var(--display); font-weight:700; text-transform:uppercase;
+  font-size:clamp(44px,7.2vw,78px); line-height:0.98; letter-spacing:0.01em;
+  margin-bottom:18px;
+}
+.role{
+  font-size:clamp(16px,2vw,18.5px); color:var(--paper-dim); max-width:540px; margin-bottom:8px;
+}
+.arabic-line{
+  font-family:var(--arabic); direction:rtl; text-align:right; color:var(--paper-faint);
+  font-size:14px; max-width:520px; margin-bottom:6px;
+}
+.spec-strip{
+  display:grid; grid-template-columns:repeat(4,1fr); border:1px solid var(--blue-line-strong);
+  margin-top:34px;
+}
+@media (max-width:640px){ .spec-strip{grid-template-columns:repeat(2,1fr);} }
+.spec-strip div{
+  padding:14px 16px; border-right:1px solid var(--blue-line-strong);
+}
+.spec-strip div:last-child{border-right:none;}
+.spec-strip .k{font-family:var(--mono); font-size:9.5px; letter-spacing:0.1em; color:var(--paper-faint); text-transform:uppercase; margin-bottom:6px;}
+.spec-strip .v{font-family:var(--mono); font-size:12.5px; color:var(--paper);}
 
-  .certs{margin-top:22px;}
-  .certs .label{font-family:var(--mono); font-size:11px; letter-spacing:0.08em; color:var(--ink-faint); text-transform:uppercase; margin-bottom:10px;}
-  .chip-row{display:flex; flex-wrap:wrap; gap:8px;}
-  .chip{
-    font-family:var(--mono); font-size:12px; padding:6px 12px;
-    border:1px solid var(--line); border-radius:20px; color:var(--ink-dim);
-  }
+.hero-links{display:flex; flex-wrap:wrap; gap:12px; margin-top:30px;}
+.btn{
+  font-family:var(--mono); font-size:11.5px; letter-spacing:0.05em;
+  padding:11px 18px; border:1px solid var(--blue-line-strong); text-decoration:none;
+  color:var(--paper); transition:all .2s ease; display:inline-flex; align-items:center; gap:8px;
+}
+.btn:hover{border-color:var(--red); color:var(--red);}
+.btn.primary{background:var(--red); border-color:var(--red); color:var(--blue-deep); font-weight:600;}
+.btn.primary:hover{background:#ef7554; color:var(--blue-deep);}
 
-  /* ---------- SKILLS ---------- */
-  .skill-groups{display:grid; grid-template-columns:repeat(2,1fr); gap:28px 40px;}
-  @media (max-width:640px){ .skill-groups{grid-template-columns:1fr;} }
-  .skill-group .g-title{
-    font-family:var(--mono); font-size:12px; letter-spacing:0.06em; text-transform:uppercase;
-    color:var(--amber); margin-bottom:12px; padding-bottom:8px; border-bottom:1px solid var(--line);
-  }
-  .skill-group .tags{display:flex; flex-wrap:wrap; gap:8px;}
-  .tag{
-    font-family:var(--mono); font-size:12.5px; color:var(--ink-dim);
-    padding:5px 10px; background:var(--bg-alt); border:1px solid var(--line-soft); border-radius:var(--radius);
-    transition:border-color .2s ease, color .2s ease;
-  }
-  .tag:hover{border-color:var(--teal); color:var(--ink);}
+/* ---- sections ---- */
+section{position:relative; padding:52px 0; border-top:1px solid var(--blue-line-strong);}
+.sec-head{display:flex; align-items:baseline; gap:14px; margin-bottom:32px; flex-wrap:wrap;}
+.sec-num{font-family:var(--mono); font-size:11px; color:var(--red); border:1px solid var(--red-dim); padding:3px 8px;}
+.sec-title{font-family:var(--display); font-weight:600; text-transform:uppercase; font-size:clamp(22px,3vw,28px); letter-spacing:0.02em;}
+.sec-title-ar{font-family:var(--arabic); direction:rtl; color:var(--paper-faint); font-size:14px; margin-left:auto;}
 
-  /* ---------- PROJECTS ---------- */
-  .proj-card{
-    background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
-    margin-bottom:16px; overflow:hidden;
-  }
-  .proj-head{
-    display:flex; align-items:center; justify-content:space-between; gap:16px;
-    padding:20px 22px; cursor:pointer; list-style:none;
-  }
-  .proj-head::-webkit-details-marker{display:none;}
-  .proj-head-left{display:flex; align-items:baseline; gap:14px; flex-wrap:wrap;}
-  .proj-id{font-family:var(--mono); font-size:11.5px; color:var(--ink-faint);}
-  .proj-title{font-family:var(--display); font-weight:600; font-size:17px;}
-  .proj-year{font-family:var(--mono); font-size:11.5px; color:var(--teal);}
-  .proj-toggle{
-    font-family:var(--mono); font-size:18px; color:var(--ink-faint); flex-shrink:0;
-    transition:transform .25s ease;
-  }
-  details[open] .proj-toggle{transform:rotate(45deg); color:var(--amber);}
-  .proj-org{font-family:var(--mono); font-size:11px; color:var(--ink-faint); padding:0 22px 14px; margin-top:-10px;}
-  .proj-body{padding:0 22px 22px;}
-  .stack-row{display:flex; flex-wrap:wrap; gap:7px; margin-bottom:16px;}
-  .stack-chip{
-    font-family:var(--mono); font-size:11.5px; color:var(--teal);
-    border:1px solid rgba(79,176,168,0.35); padding:4px 9px; border-radius:20px;
-  }
-  .proj-body ul{list-style:none;}
-  .proj-body li{
-    color:var(--ink-dim); font-size:14px; padding-left:16px; position:relative; margin-bottom:9px;
-  }
-  .proj-body li::before{content:'›'; position:absolute; left:0; color:var(--amber); font-family:var(--mono);}
+.reveal{opacity:0; transform:translateY(12px); transition:opacity .55s ease, transform .55s ease;}
+.reveal.in{opacity:1; transform:translateY(0);}
 
-  /* ---------- CONTACT / FOOTER ---------- */
-  footer{position:relative; z-index:1; padding:70px 0 50px; border-top:1px solid var(--line);}
-  .contact-title{
-    font-family:var(--display); font-weight:700; font-size:clamp(26px,4vw,38px);
-    margin-bottom:16px; max-width:520px;
-  }
-  .contact-sub{color:var(--ink-dim); max-width:480px; margin-bottom:32px;}
-  .contact-grid{display:flex; flex-wrap:wrap; gap:14px;}
-  .foot-bottom{
-    margin-top:56px; padding-top:24px; border-top:1px solid var(--line-soft);
-    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
-    font-family:var(--mono); font-size:11.5px; color:var(--ink-faint);
-  }
+/* ---- about ---- */
+.about-grid{display:grid; grid-template-columns:1.25fr 1fr; gap:44px;}
+@media (max-width:720px){ .about-grid{grid-template-columns:1fr;} }
+.about-text p{color:var(--paper-dim); margin-bottom:15px; max-width:58ch;}
+.about-text strong{color:var(--paper); font-weight:600;}
+.callout{
+  border-left:2px solid var(--red); padding-left:16px; margin:22px 0; font-family:var(--mono);
+  font-size:12.5px; color:var(--paper-faint); letter-spacing:0.02em;
+}
+.edu-panel{border:1px solid var(--blue-line-strong); padding:22px 24px;}
+.edu-panel .tag{font-family:var(--mono); font-size:10px; color:var(--red); letter-spacing:0.1em; margin-bottom:10px;}
+.edu-panel .deg{font-family:var(--display); font-weight:600; font-size:19px; text-transform:uppercase; margin-bottom:4px;}
+.edu-panel .school{font-family:var(--mono); font-size:11.5px; color:var(--paper-dim); margin-bottom:16px;}
+.edu-panel ul{list-style:none; font-size:13.5px; color:var(--paper-dim);}
+.edu-panel li{padding:7px 0; border-top:1px solid var(--blue-line);}
+.edu-panel li:first-child{border-top:none;}
+
+.certs-row{margin-top:24px; display:flex; flex-wrap:wrap; gap:10px 0;}
+.cert-item{
+  display:flex; align-items:center; gap:10px; font-family:var(--mono); font-size:12px;
+  color:var(--paper-dim); width:50%; padding:6px 0;
+}
+@media (max-width:520px){ .cert-item{width:100%;} }
+.cert-item::before{content:'◇'; color:var(--red); font-size:10px;}
+
+/* ---- skills as legend ---- */
+.legend{border:1px solid var(--blue-line-strong);}
+.legend-row{display:grid; grid-template-columns:200px 1fr; border-top:1px solid var(--blue-line);}
+.legend-row:first-child{border-top:none;}
+@media (max-width:640px){ .legend-row{grid-template-columns:1fr;} }
+.legend-key{
+  font-family:var(--mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase;
+  color:var(--red); padding:16px 18px; border-right:1px solid var(--blue-line);
+  display:flex; align-items:center;
+}
+@media (max-width:640px){ .legend-key{border-right:none; border-bottom:1px solid var(--blue-line); padding-bottom:8px;} }
+.legend-vals{padding:16px 18px; display:flex; flex-wrap:wrap; gap:8px 22px; align-items:center;}
+.legend-vals span{font-family:var(--mono); font-size:12.5px; color:var(--paper-dim); position:relative; padding-left:14px;}
+.legend-vals span::before{content:''; position:absolute; left:0; top:50%; width:6px; height:1px; background:var(--paper-faint); transform:translateY(-50%);}
+
+/* ---- projects as drawing sheets ---- */
+.sheet{
+  border:1px solid var(--blue-line-strong); margin-bottom:22px; background:rgba(255,255,255,0.012);
+}
+.sheet-top{
+  display:flex; justify-content:space-between; align-items:center; padding:14px 20px;
+  border-bottom:1px solid var(--blue-line); cursor:pointer; list-style:none; gap:14px; flex-wrap:wrap;
+}
+.sheet-top::-webkit-details-marker{display:none;}
+.sheet-top-left{display:flex; align-items:baseline; gap:14px; flex-wrap:wrap;}
+.sheet-no{font-family:var(--mono); font-size:10.5px; color:var(--paper-faint); border:1px solid var(--blue-line-strong); padding:3px 7px;}
+.sheet-title{font-family:var(--display); font-weight:600; font-size:19px; text-transform:uppercase; letter-spacing:0.01em;}
+.sheet-toggle{font-family:var(--mono); font-size:16px; color:var(--paper-faint); transition:transform .25s ease; flex-shrink:0;}
+details[open] .sheet-toggle{transform:rotate(45deg); color:var(--red);}
+
+.sheet-meta{
+  display:flex; flex-wrap:wrap; gap:0; border-bottom:1px solid var(--blue-line);
+  font-family:var(--mono); font-size:10.5px; color:var(--paper-faint);
+}
+.sheet-meta div{padding:9px 20px; border-right:1px solid var(--blue-line);}
+.sheet-meta div:last-child{border-right:none;}
+.sheet-meta b{color:var(--paper-dim); font-weight:500;}
+
+.sheet-body{padding:20px;}
+.stack-cloud{
+  display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; padding:12px 14px;
+  border:1px dashed var(--red-dim);
+}
+.stack-cloud span{font-family:var(--mono); font-size:11px; color:var(--paper); letter-spacing:0.02em;}
+.stack-cloud span:not(:last-child)::after{content:'·'; color:var(--paper-faint); margin-left:8px;}
+
+.sheet-body ul{list-style:none;}
+.sheet-body li{color:var(--paper-dim); font-size:14px; padding-left:18px; position:relative; margin-bottom:10px;}
+.sheet-body li::before{content:'—'; position:absolute; left:0; color:var(--paper-faint); font-family:var(--mono);}
+
+.sheet-footer{
+  display:flex; justify-content:flex-end; padding:0 20px 20px;
+}
+.repo-btn{
+  font-family:var(--mono); font-size:11px; letter-spacing:0.04em; padding:9px 16px;
+  border:1px solid var(--blue-line-strong); text-decoration:none; color:var(--paper-dim);
+  display:inline-flex; align-items:center; gap:8px; transition:all .2s ease;
+}
+.repo-btn:hover{border-color:var(--red); color:var(--red);}
+.repo-btn.pending{opacity:0.55; cursor:default;}
+.repo-btn.pending:hover{border-color:var(--blue-line-strong); color:var(--paper-dim);}
+
+/* ---- footer ---- */
+footer{border-top:1px solid var(--blue-line-strong); padding:64px 0 0;}
+.contact-title{
+  font-family:var(--display); font-weight:700; text-transform:uppercase; font-size:clamp(28px,4.5vw,44px);
+  line-height:1.05; margin-bottom:18px; max-width:600px;
+}
+.contact-sub{color:var(--paper-dim); max-width:480px; margin-bottom:30px;}
+.contact-grid{display:flex; flex-wrap:wrap; gap:12px; margin-bottom:50px;}
+.titlebar.bottom{border-top:1px solid var(--blue-line-strong); border-bottom:none;}
+.titlebar.bottom .wrap{padding:14px 30px;}
 </style>
 </head>
 <body>
-<div class="grid-bg"></div>
 
-<header class="nav">
-  <div class="nav-inner">
-    <a class="brand" href="#top">OMAR<span class="dot">.</span>DEV</a>
-    <nav class="links">
-      <a href="#about">ABOUT</a>
-      <a href="#skills">SKILLS</a>
-      <a href="#projects">PROJECTS</a>
-      <a href="#contact">CONTACT</a>
-    </nav>
+<div class="bp-grid"></div>
+<div class="crosshair tl"></div>
+<div class="crosshair tr"></div>
+<div class="crosshair bl"></div>
+<div class="crosshair br"></div>
+
+<div class="frame">
+
+  <div class="titlebar">
+    <div class="wrap">
+      <span class="hide-sm"><b>PROJECT</b> Portfolio — MHD Omar Oudeh</span>
+      <span><b>SHEET</b> 01/06 <span class="sep">|</span> <b>SCALE</b> N.T.S. <span class="sep hide-sm">|</span> <b class="hide-sm">REV</b><span class="hide-sm">A — 2026</span></span>
+    </div>
   </div>
-</header>
 
-<div class="wrap" id="top">
-
-  <section class="hero" style="border-top:none;">
-    <div class="eyebrow">Computer Science · AI Specialization</div>
-    <h1 class="name">MHD Omar Oudeh</h1>
-    <p class="role">AI &amp; Full-Stack Developer building classification pipelines, RBAC-driven platforms, and cross-platform apps — currently reading for a CS degree at Arab International University, Syria.</p>
-    <div class="arabic-line">مطوّر full-stack ومهتم بالذكاء الاصطناعي، طالب علوم حاسوب في الجامعة الدولية الخاصة</div>
-
-    <div class="statusblock">
-      <div><span class="prompt">&gt;</span><span class="k">status      </span><span class="v accent">open_to_remote / internship</span></div>
-      <div><span class="prompt">&gt;</span><span class="k">location    </span><span class="v">Syria</span></div>
-      <div><span class="prompt">&gt;</span><span class="k">stack       </span><span class="v">Python · PHP · Dart · SQL · JavaScript</span></div>
-      <div><span class="prompt">&gt;</span><span class="k">focus       </span><span class="v">ML/AI · Backend Systems · Mobile Apps</span></div>
-      <div><span class="prompt">&gt;</span><span class="k">languages   </span><span class="v">Arabic (native) · English (C1)</span></div>
+  <nav class="top">
+    <div class="wrap">
+      <a class="mark" href="#top">OMAR<span class="red-dot">·</span>OUDEH</a>
+      <div class="navlinks">
+        <a href="#about">ABOUT</a>
+        <a href="#skills">SKILLS</a>
+        <a href="#projects">PROJECTS</a>
+        <a href="#contact">CONTACT</a>
+      </div>
     </div>
+  </nav>
 
-    <div class="hero-links">
-      <a class="btn primary" href="https://github.com/MHD-OmarOudeh" target="_blank" rel="noopener">↗ GitHub</a>
-      <a class="btn" href="https://linkedin.com/in/mhd-omar-al-oudeh" target="_blank" rel="noopener">↗ LinkedIn</a>
-      <a class="btn" href="mailto:oumaroudeh@gmail.com">✉ Email</a>
-      <a class="btn" href="tel:+963984839553">☎ +963 98 483 9553</a>
-    </div>
-  </section>
+  <div class="wrap" id="top">
 
-  <section id="about">
-    <div class="sec-head">
-      <div class="sec-title"><span class="num">01</span>About &amp; Education</div>
-      <div class="sec-title-ar">التعليم والشهادات</div>
-    </div>
-    <div class="about-grid reveal">
-      <div class="about-text">
-        <p>I'm a Computer Science student specializing in <strong>Artificial Intelligence</strong> at Arab International University, with a working range across <strong>machine learning</strong>, <strong>backend architecture</strong>, and <strong>mobile development</strong>. Most of my project work comes out of coursework — but it's built to production standards: clean layering, tested endpoints, documented pipelines.</p>
-        <p>I care about getting the fundamentals right — <strong>zero data-leakage</strong> pipelines in ML work, <strong>role-based access</strong> in every backend I ship, and bilingual Arabic/English support where it matters. Open to remote internships and research collaborations.</p>
-        <div class="certs">
-          <div class="label">Certifications</div>
-          <div class="chip-row">
-            <span class="chip">EF SET English — C1 Advanced</span>
-            <span class="chip">AI with Cloud &amp; Cybersecurity</span>
-            <span class="chip">Backend Dev with Laravel — Tamkeen</span>
-            <span class="chip">Intro to AI — Google / Coursera</span>
+    <section class="hero" style="border-top:none;">
+      <div class="eyebrow">Computer Science — AI Specialization</div>
+      <h1 class="name">MHD Omar<br>Oudeh</h1>
+      <p class="role">AI &amp; full-stack developer engineering classification pipelines, RBAC-driven platforms, and cross-platform systems — reading for a CS degree at Arab International University, Syria.</p>
+      <div class="arabic-line">مطوّر full-stack ومهتم بالذكاء الاصطناعي — طالب علوم حاسوب، الجامعة الدولية الخاصة</div>
+
+      <div class="spec-strip">
+        <div><div class="k">Status</div><div class="v">Open to remote</div></div>
+        <div><div class="k">Location</div><div class="v">Syria</div></div>
+        <div><div class="k">Focus</div><div class="v">ML/AI · Backend</div></div>
+        <div><div class="k">Languages</div><div class="v">AR · EN (C1)</div></div>
+      </div>
+
+      <div class="hero-links">
+        <a class="btn primary" href="https://github.com/MHD-OmarOudeh" target="_blank" rel="noopener">GITHUB ↗</a>
+        <a class="btn" href="https://linkedin.com/in/mhd-omar-al-oudeh" target="_blank" rel="noopener">LINKEDIN ↗</a>
+        <a class="btn" href="mailto:oumaroudeh@gmail.com">EMAIL</a>
+        <a class="btn" href="tel:+963984839553">+963 98 483 9553</a>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="sec-head">
+        <span class="sec-num">01</span>
+        <div class="sec-title">About &amp; Education</div>
+        <div class="sec-title-ar">التعليم</div>
+      </div>
+      <div class="about-grid reveal">
+        <div class="about-text">
+          <p>I'm a Computer Science student specializing in <strong>Artificial Intelligence</strong> at Arab International University, working across <strong>machine learning</strong>, <strong>backend architecture</strong>, and <strong>mobile development</strong>. Coursework is the source, but the build quality targets production standards — layered architecture, tested endpoints, documented pipelines.</p>
+          <div class="callout">ZERO DATA-LEAKAGE PIPELINES · ROLE-BASED ACCESS BY DEFAULT · BILINGUAL AR/EN OUTPUT WHERE IT MATTERS</div>
+          <p>Open to remote internships, freelance engagements, and research collaborations.</p>
+          <div class="certs-row">
+            <div class="cert-item">EF SET English — C1 Advanced</div>
+            <div class="cert-item">AI with Cloud &amp; Cybersecurity</div>
+            <div class="cert-item">Backend Dev with Laravel — Tamkeen</div>
+            <div class="cert-item">Intro to AI — Google / Coursera</div>
           </div>
         </div>
-      </div>
-      <div class="edu-card">
-        <div class="deg">B.Sc. Computer Science — AI Specialization</div>
-        <div class="school">Arab International University (AIU) · Syria</div>
-        <div class="years">2022 — Present</div>
-        <ul>
-          <li>Machine Learning Laboratory</li>
-          <li>Knowledge Discovery &amp; Data Mining (KDD)</li>
-          <li>Data Structures &amp; Algorithms</li>
-          <li>Mobile App Programming</li>
-          <li>Database Systems</li>
-          <li>Software Engineering</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section id="skills">
-    <div class="sec-head">
-      <div class="sec-title"><span class="num">02</span>Skills</div>
-      <div class="sec-title-ar">المهارات التقنية</div>
-    </div>
-    <div class="skill-groups reveal">
-      <div class="skill-group">
-        <div class="g-title">Languages</div>
-        <div class="tags">
-          <span class="tag">Python</span><span class="tag">PHP</span><span class="tag">Dart</span>
-          <span class="tag">SQL</span><span class="tag">Java</span><span class="tag">JavaScript</span><span class="tag">C#</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <div class="g-title">ML &amp; Data Science</div>
-        <div class="tags">
-          <span class="tag">scikit-learn</span><span class="tag">NumPy</span><span class="tag">Pandas</span>
-          <span class="tag">Matplotlib</span><span class="tag">Seaborn</span><span class="tag">SMOTE</span>
-          <span class="tag">GridSearchCV</span><span class="tag">K-Means</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <div class="g-title">Algorithms</div>
-        <div class="tags">
-          <span class="tag">Decision Trees</span><span class="tag">KNN</span><span class="tag">Naive Bayes</span>
-          <span class="tag">Logistic Regression</span><span class="tag">SVM</span><span class="tag">Linear Regression</span>
-          <span class="tag">Ensemble Learning</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <div class="g-title">Backend</div>
-        <div class="tags">
-          <span class="tag">Laravel 12</span><span class="tag">ASP.NET</span><span class="tag">REST API</span>
-          <span class="tag">Sanctum</span><span class="tag">Passport OAuth2</span><span class="tag">Spatie RBAC</span>
-          <span class="tag">Stripe</span><span class="tag">Firebase FCM</span><span class="tag">DomPDF</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <div class="g-title">Mobile &amp; Desktop</div>
-        <div class="tags">
-          <span class="tag">Flutter</span><span class="tag">sqflite</span><span class="tag">Navigator 2.0</span>
-          <span class="tag">Python Tkinter</span><span class="tag">ReportLab</span><span class="tag">OpenPyXL</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <div class="g-title">Databases &amp; Architecture</div>
-        <div class="tags">
-          <span class="tag">MySQL</span><span class="tag">SQLite</span><span class="tag">Eloquent ORM</span>
-          <span class="tag">Clean Architecture</span><span class="tag">Service Layer</span><span class="tag">Observer Pattern</span>
-          <span class="tag">MVC / MVVM</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="projects">
-    <div class="sec-head">
-      <div class="sec-title"><span class="num">03</span>Projects</div>
-      <div class="sec-title-ar">المشاريع</div>
-    </div>
-
-    <div class="reveal">
-      <details class="proj-card" open>
-        <summary class="proj-head">
-          <div class="proj-head-left">
-            <span class="proj-id">PRJ-01</span>
-            <span class="proj-title">Kandura Store — E-Commerce Platform</span>
-            <span class="proj-year">2026</span>
-          </div>
-          <span class="proj-toggle">+</span>
-        </summary>
-        <div class="proj-org">Tamkin</div>
-        <div class="proj-body">
-          <div class="stack-row">
-            <span class="stack-chip">Laravel 12</span><span class="stack-chip">PHP 8.3</span>
-            <span class="stack-chip">MySQL</span><span class="stack-chip">Stripe</span>
-            <span class="stack-chip">Firebase FCM</span>
-          </div>
+        <div class="edu-panel">
+          <div class="tag">DEGREE — IN PROGRESS</div>
+          <div class="deg">B.Sc. Computer Science</div>
+          <div class="school">AI Specialization · AIU, Syria · 2022–Present</div>
           <ul>
-            <li>Full-stack platform for designing and ordering traditional Khaleeji Kandura — 40+ REST endpoints, Sanctum auth, Spatie RBAC (Super Admin / Admin / User) with policy-based authorization.</li>
-            <li>Stripe Checkout + webhooks, an in-app wallet (deposit / withdraw / auto-refund on cancellation), and Cash on Delivery unified in one payment system.</li>
-            <li>Smart coupon engine (percentage &amp; fixed, usage limits, per-user, auto-expiry) plus a star-rating &amp; reviews module.</li>
-            <li>Real-time push notifications via Firebase FCM through a queue-based async pipeline; auto-generated Arabic/English RTL PDF invoices via DomPDF.</li>
-            <li>Architected with 15 models, 25+ controllers, 8 service classes, 4 security policies, observer pattern, event-driven listeners, over a 30-table normalized schema.</li>
+            <li>Machine Learning Laboratory</li>
+            <li>Knowledge Discovery &amp; Data Mining</li>
+            <li>Data Structures &amp; Algorithms</li>
+            <li>Mobile App Programming</li>
+            <li>Database Systems</li>
+            <li>Software Engineering</li>
           </ul>
         </div>
-      </details>
+      </div>
+    </section>
 
-      <details class="proj-card">
-        <summary class="proj-head">
-          <div class="proj-head-left">
-            <span class="proj-id">PRJ-02</span>
-            <span class="proj-title">Heart Disease Classification — ML Laboratory</span>
-            <span class="proj-year">2024–2025</span>
-          </div>
-          <span class="proj-toggle">+</span>
-        </summary>
-        <div class="proj-org">AIU — ML Lab Course</div>
-        <div class="proj-body">
-          <div class="stack-row">
-            <span class="stack-chip">Python</span><span class="stack-chip">NumPy</span>
-            <span class="stack-chip">scikit-learn</span><span class="stack-chip">Matplotlib</span>
-          </div>
-          <ul>
-            <li>Built and compared KNN (from scratch), SVM (RBF kernel), and Random Forest (100+ trees) on the UCI Cleveland Heart Disease dataset (297 samples, 13 features).</li>
-            <li>Full pipeline: EDA, missing-value handling, stratified 60/20/20 split, StandardScaler fit strictly on training data — zero data leakage.</li>
-            <li>Hyperparameter tuning and error analysis with feature-importance extraction.</li>
-          </ul>
+    <section id="skills">
+      <div class="sec-head">
+        <span class="sec-num">02</span>
+        <div class="sec-title">Skills</div>
+        <div class="sec-title-ar">المهارات</div>
+      </div>
+      <div class="legend reveal">
+        <div class="legend-row">
+          <div class="legend-key">Languages</div>
+          <div class="legend-vals"><span>Python</span><span>PHP</span><span>Dart</span><span>SQL</span><span>Java</span><span>JavaScript</span><span>C#</span></div>
         </div>
-      </details>
+        <div class="legend-row">
+          <div class="legend-key">ML &amp; Data Science</div>
+          <div class="legend-vals"><span>scikit-learn</span><span>NumPy</span><span>Pandas</span><span>Matplotlib</span><span>Seaborn</span><span>SMOTE</span><span>GridSearchCV</span><span>K-Means</span></div>
+        </div>
+        <div class="legend-row">
+          <div class="legend-key">Algorithms</div>
+          <div class="legend-vals"><span>Decision Trees</span><span>KNN</span><span>Naive Bayes</span><span>Logistic Regression</span><span>SVM</span><span>Linear Regression</span><span>Ensemble Learning</span></div>
+        </div>
+        <div class="legend-row">
+          <div class="legend-key">Backend</div>
+          <div class="legend-vals"><span>Laravel 12</span><span>ASP.NET</span><span>REST API</span><span>Sanctum</span><span>Passport OAuth2</span><span>Spatie RBAC</span><span>Stripe</span><span>Firebase FCM</span><span>DomPDF</span></div>
+        </div>
+        <div class="legend-row">
+          <div class="legend-key">Mobile &amp; Desktop</div>
+          <div class="legend-vals"><span>Flutter</span><span>sqflite</span><span>Navigator 2.0</span><span>Python Tkinter</span><span>ReportLab</span><span>OpenPyXL</span></div>
+        </div>
+        <div class="legend-row">
+          <div class="legend-key">Databases &amp; Architecture</div>
+          <div class="legend-vals"><span>MySQL</span><span>SQLite</span><span>Eloquent ORM</span><span>Clean Architecture</span><span>Service Layer</span><span>Observer Pattern</span><span>MVC / MVVM</span></div>
+        </div>
+      </div>
+    </section>
 
-      <details class="proj-card">
-        <summary class="proj-head">
-          <div class="proj-head-left">
-            <span class="proj-id">PRJ-03</span>
-            <span class="proj-title">KDD Lab Final Project — Classification, Regression &amp; Clustering</span>
-            <span class="proj-year">2024–2025</span>
-          </div>
-          <span class="proj-toggle">+</span>
-        </summary>
-        <div class="proj-org">AIU — KDD Lab Course</div>
-        <div class="proj-body">
-          <div class="stack-row">
-            <span class="stack-chip">Python</span><span class="stack-chip">scikit-learn</span>
-            <span class="stack-chip">SMOTE</span><span class="stack-chip">GridSearchCV</span><span class="stack-chip">K-Means</span>
-          </div>
-          <ul>
-            <li>Classification (Heart Disease): KNN + Decision Tree with GridSearchCV and SMOTE oversampling on the Cleveland dataset, 303 instances.</li>
-            <li>Regression (Bike Sharing Demand): Linear Regression + Decision Tree Regressor with engineered interaction features, evaluated via RMSE / MAE / R².</li>
-            <li>Clustering (Japanese Universities): K-Means over 813 universities, 22 features — optimal K chosen via Elbow Method + Silhouette Score, clusters profiled by size, reputation, and difficulty.</li>
-          </ul>
-        </div>
-      </details>
+    <section id="projects">
+      <div class="sec-head">
+        <span class="sec-num">03</span>
+        <div class="sec-title">Projects</div>
+        <div class="sec-title-ar">المشاريع</div>
+      </div>
 
-      <details class="proj-card">
-        <summary class="proj-head">
-          <div class="proj-head-left">
-            <span class="proj-id">PRJ-04</span>
-            <span class="proj-title">Gym Management System</span>
-            <span class="proj-year">2024–2025</span>
-          </div>
-          <span class="proj-toggle">+</span>
-        </summary>
-        <div class="proj-org">AIU — Mobile App Programming Course</div>
-        <div class="proj-body">
-          <div class="stack-row">
-            <span class="stack-chip">Flutter</span><span class="stack-chip">Dart</span><span class="stack-chip">SQLite</span>
-          </div>
-          <ul>
-            <li>Cross-platform mobile app with role-based access (Admin, Receptionist, Coach); full CRUD via sqflite for members, attendance, payments, and training sessions.</li>
-            <li>Custom dark navy &amp; orange UI across 15+ screens with role-specific dashboards; image_picker for member photo upload.</li>
-            <li>Produced full SRS documentation covering functional requirements, data models, and system architecture.</li>
-          </ul>
-        </div>
-      </details>
+      <div class="dim"><div class="arm"></div><div class="label">2024 — 2026</div><div class="arm"></div></div>
 
-      <details class="proj-card">
-        <summary class="proj-head">
-          <div class="proj-head-left">
-            <span class="proj-id">PRJ-05</span>
-            <span class="proj-title">Hospital Management System</span>
-            <span class="proj-year">2026</span>
-          </div>
-          <span class="proj-toggle">+</span>
-        </summary>
-        <div class="proj-org">AIU — Programming Languages Course</div>
-        <div class="proj-body">
-          <div class="stack-row">
-            <span class="stack-chip">Python</span><span class="stack-chip">Tkinter</span>
-            <span class="stack-chip">SQLite</span><span class="stack-chip">ReportLab</span><span class="stack-chip">OpenPyXL</span>
-          </div>
-          <ul>
-            <li>Desktop GUI for hospital operations: doctor and patient records, doctor-patient assignment, specialty/disease-based search, SHA-256 hashed login.</li>
-            <li>Data validation, auto-generated IDs, report export to PDF (ReportLab) and Excel (OpenPyXL).</li>
-            <li>SQLite schema designed with foreign-key relationships.</li>
-          </ul>
-        </div>
-      </details>
+      <div class="reveal">
 
-      <details class="proj-card">
-        <summary class="proj-head">
-          <div class="proj-head-left">
-            <span class="proj-id">PRJ-06</span>
-            <span class="proj-title">Service Provider Platform</span>
-            <span class="proj-year">2026</span>
+        <details class="sheet" open>
+          <summary class="sheet-top">
+            <div class="sheet-top-left">
+              <span class="sheet-no">SHEET 01</span>
+              <span class="sheet-title">Kandura Store — E-Commerce Platform</span>
+            </div>
+            <span class="sheet-toggle">+</span>
+          </summary>
+          <div class="sheet-meta">
+            <div><b>CLIENT</b> Tamkin</div>
+            <div><b>YEAR</b> 2026</div>
+            <div><b>TYPE</b> Full-stack platform</div>
           </div>
-          <span class="proj-toggle">+</span>
-        </summary>
-        <div class="proj-org">Tamkin</div>
-        <div class="proj-body">
-          <div class="stack-row">
-            <span class="stack-chip">Laravel 12</span><span class="stack-chip">PHP 8.2</span>
-            <span class="stack-chip">Passport OAuth2</span><span class="stack-chip">Blade</span>
+          <div class="sheet-body">
+            <div class="stack-cloud"><span>Laravel 12</span><span>PHP 8.3</span><span>MySQL</span><span>Stripe</span><span>Firebase FCM</span></div>
+            <ul>
+              <li>Platform for designing and ordering traditional Khaleeji Kandura — 40+ REST endpoints, Sanctum auth, Spatie RBAC (Super Admin / Admin / User) with policy-based authorization.</li>
+              <li>Stripe Checkout + webhooks, an in-app wallet (deposit / withdraw / auto-refund on cancellation), and Cash on Delivery unified in one payment system.</li>
+              <li>Smart coupon engine (percentage &amp; fixed, usage limits, per-user, auto-expiry) plus a star-rating &amp; reviews module.</li>
+              <li>Real-time push notifications via Firebase FCM through a queue-based async pipeline; auto-generated Arabic/English RTL PDF invoices via DomPDF.</li>
+              <li>15 models, 25+ controllers, 8 service classes, 4 security policies, observer pattern, event-driven listeners, over a 30-table normalized schema.</li>
+            </ul>
           </div>
-          <ul>
-            <li>Marketplace platform with a three-role system: Admin / Client / Provider.</li>
-            <li>Laravel Passport OAuth2 authentication, hierarchical category management, API resources, and PHPUnit feature tests.</li>
-          </ul>
-        </div>
-      </details>
+          <div class="sheet-footer">
+            <a class="repo-btn pending" title="Send me the repo link and I'll wire it in">SOURCE — LINK PENDING</a>
+          </div>
+        </details>
+
+        <details class="sheet">
+          <summary class="sheet-top">
+            <div class="sheet-top-left">
+              <span class="sheet-no">SHEET 02</span>
+              <span class="sheet-title">Heart Disease Classification</span>
+            </div>
+            <span class="sheet-toggle">+</span>
+          </summary>
+          <div class="sheet-meta">
+            <div><b>COURSE</b> AIU — ML Lab</div>
+            <div><b>YEAR</b> 2024–2025</div>
+            <div><b>TYPE</b> Supervised learning</div>
+          </div>
+          <div class="sheet-body">
+            <div class="stack-cloud"><span>Python</span><span>NumPy</span><span>scikit-learn</span><span>Matplotlib</span></div>
+            <ul>
+              <li>Built and compared KNN (from scratch), SVM (RBF kernel), and Random Forest (100+ trees) on the UCI Cleveland dataset — 297 samples, 13 features.</li>
+              <li>Full pipeline: EDA, missing-value handling, stratified 60/20/20 split, StandardScaler fit strictly on training data — zero data leakage.</li>
+              <li>Hyperparameter tuning and error analysis with feature-importance extraction.</li>
+            </ul>
+          </div>
+          <div class="sheet-footer">
+            <a class="repo-btn pending" title="Send me the repo link and I'll wire it in">SOURCE — LINK PENDING</a>
+          </div>
+        </details>
+
+        <details class="sheet">
+          <summary class="sheet-top">
+            <div class="sheet-top-left">
+              <span class="sheet-no">SHEET 03</span>
+              <span class="sheet-title">KDD Final Project</span>
+            </div>
+            <span class="sheet-toggle">+</span>
+          </summary>
+          <div class="sheet-meta">
+            <div><b>COURSE</b> AIU — KDD Lab</div>
+            <div><b>YEAR</b> 2024–2025</div>
+            <div><b>TYPE</b> Classification · Regression · Clustering</div>
+          </div>
+          <div class="sheet-body">
+            <div class="stack-cloud"><span>Python</span><span>scikit-learn</span><span>SMOTE</span><span>GridSearchCV</span><span>K-Means</span></div>
+            <ul>
+              <li>Classification (Heart Disease): KNN + Decision Tree with GridSearchCV and SMOTE oversampling — 303 instances.</li>
+              <li>Regression (Bike Sharing Demand): Linear Regression + Decision Tree Regressor with engineered interaction features, evaluated via RMSE / MAE / R².</li>
+              <li>Clustering (Japanese Universities): K-Means over 813 universities, 22 features — optimal K via Elbow Method + Silhouette Score.</li>
+            </ul>
+          </div>
+          <div class="sheet-footer">
+            <a class="repo-btn pending" title="Send me the repo link and I'll wire it in">SOURCE — LINK PENDING</a>
+          </div>
+        </details>
+
+        <details class="sheet">
+          <summary class="sheet-top">
+            <div class="sheet-top-left">
+              <span class="sheet-no">SHEET 04</span>
+              <span class="sheet-title">Gym Management System</span>
+            </div>
+            <span class="sheet-toggle">+</span>
+          </summary>
+          <div class="sheet-meta">
+            <div><b>COURSE</b> AIU — Mobile App Programming</div>
+            <div><b>YEAR</b> 2024–2025</div>
+            <div><b>TYPE</b> Cross-platform mobile</div>
+          </div>
+          <div class="sheet-body">
+            <div class="stack-cloud"><span>Flutter</span><span>Dart</span><span>SQLite</span></div>
+            <ul>
+              <li>Role-based access (Admin, Receptionist, Coach); full CRUD via sqflite for members, attendance, payments, and training sessions.</li>
+              <li>Custom dark navy &amp; orange UI across 15+ screens with role-specific dashboards; image_picker for member photo upload.</li>
+              <li>Full SRS documentation covering functional requirements, data models, and system architecture.</li>
+            </ul>
+          </div>
+          <div class="sheet-footer">
+            <a class="repo-btn pending" title="Send me the repo link and I'll wire it in">SOURCE — LINK PENDING</a>
+          </div>
+        </details>
+
+        <details class="sheet">
+          <summary class="sheet-top">
+            <div class="sheet-top-left">
+              <span class="sheet-no">SHEET 05</span>
+              <span class="sheet-title">Hospital Management System</span>
+            </div>
+            <span class="sheet-toggle">+</span>
+          </summary>
+          <div class="sheet-meta">
+            <div><b>COURSE</b> AIU — Programming Languages</div>
+            <div><b>YEAR</b> 2026</div>
+            <div><b>TYPE</b> Desktop GUI</div>
+          </div>
+          <div class="sheet-body">
+            <div class="stack-cloud"><span>Python</span><span>Tkinter</span><span>SQLite</span><span>ReportLab</span><span>OpenPyXL</span></div>
+            <ul>
+              <li>Doctor and patient records, doctor-patient assignment, specialty/disease-based search, SHA-256 hashed login.</li>
+              <li>Data validation, auto-generated IDs, report export to PDF (ReportLab) and Excel (OpenPyXL).</li>
+              <li>SQLite schema designed with foreign-key relationships.</li>
+            </ul>
+          </div>
+          <div class="sheet-footer">
+            <a class="repo-btn pending" title="Send me the repo link and I'll wire it in">SOURCE — LINK PENDING</a>
+          </div>
+        </details>
+
+        <details class="sheet">
+          <summary class="sheet-top">
+            <div class="sheet-top-left">
+              <span class="sheet-no">SHEET 06</span>
+              <span class="sheet-title">Service Provider Platform</span>
+            </div>
+            <span class="sheet-toggle">+</span>
+          </summary>
+          <div class="sheet-meta">
+            <div><b>CLIENT</b> Tamkin</div>
+            <div><b>YEAR</b> 2026</div>
+            <div><b>TYPE</b> Marketplace platform</div>
+          </div>
+          <div class="sheet-body">
+            <div class="stack-cloud"><span>Laravel 12</span><span>PHP 8.2</span><span>Passport OAuth2</span><span>Blade</span></div>
+            <ul>
+              <li>Three-role system: Admin / Client / Provider.</li>
+              <li>Laravel Passport OAuth2 authentication, hierarchical category management, API resources, and PHPUnit feature tests.</li>
+            </ul>
+          </div>
+          <div class="sheet-footer">
+            <a class="repo-btn pending" title="Send me the repo link and I'll wire it in">SOURCE — LINK PENDING</a>
+          </div>
+        </details>
+
+      </div>
+    </section>
+
+  </div>
+
+  <footer id="contact">
+    <div class="wrap">
+      <div class="contact-title reveal">Let's build something worth shipping.</div>
+      <p class="contact-sub reveal">Open to remote internships, freelance work, and research collaborations in AI/ML or full-stack development.</p>
+      <div class="contact-grid reveal">
+        <a class="btn primary" href="mailto:oumaroudeh@gmail.com">EMAIL — oumaroudeh@gmail.com</a>
+        <a class="btn" href="https://github.com/MHD-OmarOudeh" target="_blank" rel="noopener">GITHUB ↗</a>
+        <a class="btn" href="https://linkedin.com/in/mhd-omar-al-oudeh" target="_blank" rel="noopener">LINKEDIN ↗</a>
+        <a class="btn" href="tel:+963984839553">+963 98 483 9553</a>
+      </div>
     </div>
-  </section>
+    <div class="titlebar bottom">
+      <div class="wrap">
+        <span><b>DRAWN BY</b> M. Omar Oudeh</span>
+        <span>Syria — References available upon request</span>
+      </div>
+    </div>
+  </footer>
 
 </div>
-
-<footer id="contact">
-  <div class="wrap">
-    <div class="contact-title reveal">Let's build something worth shipping.</div>
-    <p class="contact-sub reveal">Open to remote internships, freelance work, and research collaborations in AI/ML or full-stack development.</p>
-    <div class="contact-grid reveal">
-      <a class="btn primary" href="mailto:oumaroudeh@gmail.com">✉ oumaroudeh@gmail.com</a>
-      <a class="btn" href="https://github.com/MHD-OmarOudeh" target="_blank" rel="noopener">↗ github.com/MHD-OmarOudeh</a>
-      <a class="btn" href="https://linkedin.com/in/mhd-omar-al-oudeh" target="_blank" rel="noopener">↗ LinkedIn</a>
-      <a class="btn" href="tel:+963984839553">☎ +963 98 483 9553</a>
-    </div>
-    <div class="foot-bottom">
-      <span>MHD Omar Oudeh — Syria</span>
-      <span>References available upon request</span>
-    </div>
-  </div>
-</footer>
 
 <script>
   const observer = new IntersectionObserver((entries) => {
